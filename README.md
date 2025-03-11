@@ -35,8 +35,7 @@ https://github.com/Digilent/Cmod-S7-25-OOB/blob/master/src/constraints/Cmod-S7-2
 ## Clock Generation
 
 Mixed-mode clock manager (MMCM) to generate a 100 Mhz clock.
-Project Manager > IP Catalog > Vivado Repository > FPGA Features and Design > Clocking > Clocking Wizard 
-> Double Clock to start the wizard
+Project Manager > IP Catalog > Vivado Repository > FPGA Features and Design > Clocking > Clocking Wizard > Double Click to start the wizard
 
 Switch to the "Clocking Options" Tab and change Primary clk_in1 to 12.000 Mhz since the CMOD S7 has a 12 Mhz clock source onboard.
 Switch to the "Output Clocks" Tab and make sure clk_out1 is set to 100.000 Mhz.
@@ -137,6 +136,46 @@ File type > Verilog
 File name: clock_divider
 File location: Local to project
 
+Here is the code for the divider:
+
+```
+module clock_divider(
+    input wire clk,
+    output reg divided_clk = 0
+    );
+    
+    // (clock_frequency / (2*desired_frequency)) - 1
+    // (100 Mhz / (2*1 Hz)) - 1 = (100000000 / 2) - 1 = 50000000 - 1 = 49999999
+    localparam div_value = 49999999; 
+    integer counter_value = 0;
+    
+    always @(posedge clk)
+    begin
+        if (counter_value == div_value)
+        begin
+            counter_value = 0;
+        end
+        else
+        begin 
+            counter_value <= counter_value + 1;
+        end
+    end
+    
+    always @(posedge clk)
+    begin
+        if (counter_value == div_value)
+        begin
+            divided_clk <= ~divided_clk;
+        end
+        else
+        begin 
+            divided_clk <= divided_clk;
+        end
+    end
+    
+endmodule
+```
+
 ## Using the LEDS
 
 ERROR: [DRC NSTD-1] Unspecified I/O Standard: 4 out of 5 logical ports use I/O standard (IOSTANDARD) value 'DEFAULT', 
@@ -158,8 +197,40 @@ To allow bitstream creation with unspecified pin locations (not recommended), us
 NOTE: When using the Vivado Runs infrastructure (e.g. launch_runs Tcl command), add this command to a .tcl file and add that file as a pre-hook for 
 write_bitstream step for the implementation run.  Problem ports: leds[3:0].
 
+Here is a top-level module that assigns the divided clock to LED 1.
 
-One prerequisit to using LEDS is that I/O standards have to be defined explicitly.
+```
+module top(
+    input wire clk,
+    output wire[3:0] led
+    );
+    
+    wire clk_out1;
+    wire reset;
+    wire locked;
+    
+    clk_wiz_0 clock(
+        // Clock in ports
+        // Clock out ports
+        clk_out1,
+        // Status and control signals
+        reset,
+        locked,
+        clk
+    );
+    
+    wire slow_clk;
+    
+    clock_divider cd(clk_out1, slow_clk);
+    
+    assign led[0] = slow_clk;
+    assign led[1] = 0;
+    assign led[2] = 0;
+    assign led[3] = 0;    
+ 
+endmodule
+```
+
 
 ## UART
 
