@@ -1,0 +1,35 @@
+#-----------------------------------------------------------
+# Vivado v2024.2 (64-bit)
+# SW Build 5239630 on Fri Nov 08 22:35:27 MST 2024
+# IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
+# SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
+# Start of session at: Tue Mar 11 20:23:05 2025
+# Process ID         : 13060
+# Current directory  : C:/dev/fpga/cmod_s7/UART
+# Command line       : vivado.exe -gui_launcher_event rodinguilauncherevent20924 C:\dev\fpga\cmod_s7\UART\UART.xpr
+# Log file           : C:/dev/fpga/cmod_s7/UART/vivado.log
+# Journal file       : C:/dev/fpga/cmod_s7/UART\vivado.jou
+# Running On         : DESKTOP-91CSLS9
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 19045
+# Processor Detail   : Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
+# CPU Frequency      : 3410 MHz
+# CPU Physical cores : 4
+# CPU Logical cores  : 8
+# Host memory        : 17132 MB
+# Swap memory        : 2550 MB
+# Total Virtual      : 19682 MB
+# Available Virtual  : 7676 MB
+#-----------------------------------------------------------
+start_gui
+open_project C:/dev/fpga/cmod_s7/UART/UART.xpr
+WARNING: [Board 49-26] cannot add Board Part digilentinc.com:genesys2:part0:1.1 available at D:/Xilinx/Vivado/2024.2/data/boards/board_files/genesys2/H/board.xml as part xc7k325tffg900-2 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part digilentinc.com:sword:part0:1.0 available at D:/Xilinx/Vivado/2024.2/data/boards/board_files/sword/C.0/board.xml as part xc7k325tffg900-2 specified in board_part file is either invalid or not available
+Scanning sources...
+Finished scanning sources
+WARNING: [Board 49-151] The current board 'digilentinc.com::cmod-s7-25:1.0' is from a local repo. The vivado install has a corresponding board with version greater than or equal to the local repo board. Please use boards from vivado install to avoid any upgrade/migrate issues
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'D:/Xilinx/Vivado/2024.2/data/ip'.
+open_project: Time (s): cpu = 00:00:24 ; elapsed = 00:00:11 . Memory (MB): peak = 1312.527 ; gain = 234.930
+update_compile_order -fileset sources_1
