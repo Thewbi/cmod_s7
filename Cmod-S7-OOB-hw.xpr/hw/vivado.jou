@@ -1,0 +1,54 @@
+#-----------------------------------------------------------
+# Vivado v2024.2 (64-bit)
+# SW Build 5239630 on Fri Nov 08 22:35:27 MST 2024
+# IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
+# SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
+# Start of session at: Tue Mar 11 17:03:40 2025
+# Process ID         : 9408
+# Current directory  : C:/dev/fpga/cmod_s7/Cmod-S7-OOB-hw.xpr/hw
+# Command line       : vivado.exe -gui_launcher_event rodinguilauncherevent11336 C:\dev\fpga\cmod_s7\Cmod-S7-OOB-hw.xpr\hw\hw.xpr
+# Log file           : C:/dev/fpga/cmod_s7/Cmod-S7-OOB-hw.xpr/hw/vivado.log
+# Journal file       : C:/dev/fpga/cmod_s7/Cmod-S7-OOB-hw.xpr/hw\vivado.jou
+# Running On         : DESKTOP-91CSLS9
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 19045
+# Processor Detail   : Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
+# CPU Frequency      : 3410 MHz
+# CPU Physical cores : 4
+# CPU Logical cores  : 8
+# Host memory        : 17132 MB
+# Swap memory        : 2550 MB
+# Total Virtual      : 19682 MB
+# Available Virtual  : 10522 MB
+#-----------------------------------------------------------
+start_gui
+open_project C:/dev/fpga/cmod_s7/Cmod-S7-OOB-hw.xpr/hw/hw.xpr
+upgrade_project -migrate_output_products
+update_compile_order -fileset sources_1
+reset_run synth_1
+launch_runs synth_1 -jobs 4
+wait_on_run synth_1
+launch_runs impl_1 -jobs 4
+wait_on_run impl_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+open_hw_manager
+connect_hw_server -url localhost:3121 -allow_non_jtag
+current_hw_target [get_hw_targets */xilinx_tcf/Digilent/210376B7D926A]
+set_property PARAM.FREQUENCY 15000000 [get_hw_targets */xilinx_tcf/Digilent/210376B7D926A]
+open_hw_target
+set_property PROGRAM.FILE {C:/dev/fpga/cmod_s7/Cmod-S7-OOB-hw.xpr/hw/hw.runs/impl_1/top.bit} [get_hw_devices xc7s25_0]
+current_hw_device [get_hw_devices xc7s25_0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7s25_0] 0]
+set_property PROBES.FILE {} [get_hw_devices xc7s25_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7s25_0]
+set_property PROGRAM.FILE {C:/dev/fpga/cmod_s7/Cmod-S7-OOB-hw.xpr/hw/hw.runs/impl_1/top.bit} [get_hw_devices xc7s25_0]
+program_hw_devices [get_hw_devices xc7s25_0]
+refresh_hw_device [lindex [get_hw_devices xc7s25_0] 0]
+close_project
+xhub::refresh_catalog [xhub::get_xstores xilinx_board_store]
+set_param board.repoPaths {C:/Users/user9/AppData/Roaming/Xilinx/Vivado/2024.2/xhub/board_store/xilinx_board_store}
+xhub::install [xhub::get_xitems digilentinc.com:xilinx_board_store:cmod-s7-25:1.0]
+create_project UART C:/dev/fpga/cmod_s7/UART -part xc7s25csga225-1
+set_property board_part digilentinc.com:cmod-s7-25:part0:1.0 [current_project]
+add_files -fileset constrs_1 -norecurse C:/Users/user9/Downloads/Cmod-S7-25-Master.xdc

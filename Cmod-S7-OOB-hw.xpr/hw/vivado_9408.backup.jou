@@ -1,0 +1,19 @@
+#-----------------------------------------------------------
+# Vivado v2020.1 (64-bit)
+# SW Build 2902540 on Wed May 27 19:54:35 MDT 2020
+# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
+# Start of session at: Thu Nov  5 16:47:17 2020
+# Process ID: 471712
+# Current directory: /home/ciprian/Documents/Github/Cmod-S7/hw/scripts
+# Command line: vivado -mode tcl
+# Log file: /home/ciprian/Documents/Github/Cmod-S7/hw/scripts/vivado.log
+# Journal file: /home/ciprian/Documents/Github/Cmod-S7/hw/scripts/vivado.jou
+#-----------------------------------------------------------
+set argv "-r ~/Documents/Github/Cmod-S7/hw/"
+source digilent_vivado_checkout.tcl
+close_project
+open_project /home/ciprian/Documents/Github/Cmod-S7/hw/proj/hw.xpr
+update_compile_order -fileset sources_1
+launch_runs impl_1 -to_step write_bitstream -jobs 9
+wait_on_run impl_1 
+archive_project /home/ciprian/Documents/Github/release/Cmod-S7/Cmod-S7-25T-OOB-hw.xpr.zip -force -include_local_ip_cache -include_config_settings
