@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2024.2 (64-bit)
+# SW Build 5239630 on Fri Nov 08 22:35:27 MST 2024
+# IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
+# SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
+# Start of session at: Tue Mar 11 20:18:04 2025
+# Process ID         : 19836
+# Current directory  : C:/dev/fpga/cmod_s7/UART/UART.runs/impl_1
+# Command line       : vivado.exe -log top.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source top.tcl -notrace
+# Log file           : C:/dev/fpga/cmod_s7/UART/UART.runs/impl_1/top.vdi
+# Journal file       : C:/dev/fpga/cmod_s7/UART/UART.runs/impl_1\vivado.jou
+# Running On         : DESKTOP-91CSLS9
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 19045
+# Processor Detail   : Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
+# CPU Frequency      : 3410 MHz
+# CPU Physical cores : 4
+# CPU Logical cores  : 8
+# Host memory        : 17132 MB
+# Swap memory        : 2550 MB
+# Total Virtual      : 19682 MB
+# Available Virtual  : 5000 MB
+#-----------------------------------------------------------
+source top.tcl -notrace
