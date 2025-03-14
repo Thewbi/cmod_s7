@@ -233,6 +233,8 @@ endmodule
 
 # State Machines with Verilog
 
+The strategy outlined in the following was taken from  https://www.fpga4student.com/2017/09/verilog-code-for-moore-fsm-sequence-detector.html
+
 This example creates a Moore state machine which is characterized by the fact that the output dependes on the current state (Not on the input).
 
 A Moore state machine needs to check the input and transition to the next state.
@@ -244,13 +246,15 @@ In Verilog the state machine consists of:
 * The reset or application of the next state - perform reset and the transition into the next state!
 * The output logic of the current state - output of signals based on the current state!
 
-In Verilog, a variable can only be written by one sequential logic block and never by more than one. This means the logic that determines and assigns the next state is conflicting with the logic that performs the reset.
+In Verilog, a variable can only be written by one sequential logic block and never by more than one. This means the logic that determines and assigns the next state is conflicting with the logic that performs the reset because both need to update the current state because the reset logic has to assign the initial state to the current state.
 
-To get rid of this conflict, the reset and application of the next state is combined into a single logic block (application of the next state). This reset/apply block will set a new value into the variable 'current_state'.
+To get rid of this conflict, the reset and application of the next state is combined into a single logic block (reset or application of the next state). This reset/apply block will set a new value into the variable 'current_state'. It is the only block that writes to the 'current_state' variable and that way the Verilog constraint is met.
 
-There will be a separate logic block (identification of the next state) that determines the next state but assigns that next state into the 'next_state' variable instead of into into the 'current_state' variable. The reset/apply block will update 'current_state' from the 'next_state' variable.
+There will be a separate logic block (identification of the next state) that determines the next state but assigns that next state into the 'next_state' variable instead of into into the 'current_state' variable directly. The reset/apply block will update 'current_state' from the 'next_state' variable as stated above.
 
-A third block reads 'current_state' and performs the actions that the state machine has to execute during each individual state.
+A third block reads the 'current_state' variable and contains a large switch-case statement containing a case for each state of the statemachine. The case-statements perform the actions that the state machine has to execute during each individual state.
+
+Next follows example code that shows how to implement a state machine according to the strategy outlined above.
 
 ## Define the states
 
