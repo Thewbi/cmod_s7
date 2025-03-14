@@ -246,11 +246,15 @@ In Verilog the state machine consists of:
 * The reset or application of the next state - perform reset and the transition into the next state!
 * The output logic of the current state - output of signals based on the current state!
 
-In Verilog, a variable can only be written by one sequential logic block and never by more than one. This means the logic that determines and assigns the next state is conflicting with the logic that performs the reset because both need to update the current state because the reset logic has to assign the initial state to the current state.
+*In Verilog, a variable can only be written by one sequential logic block and never by more than one.*
+
+This is the central constraint the dictates the architecture for state machines in Verilog. The architecture for Verilog makes no immediate sense to programmers of high-level programming languages (Höhere Programmiersprachen) in which a variable can be updated from several places in the code.
+
+In Verilog the constraint above means that a logic block that determines and assigns the next state to the current state is conflicting with a logic that performs the reset because both blocks need to update the 'current_state' variable because the reset logic has to assign the initial state to the 'current_state' variable.
 
 To get rid of this conflict, the reset and application of the next state is combined into a single logic block (reset or application of the next state). This reset/apply block will set a new value into the variable 'current_state'. It is the only block that writes to the 'current_state' variable and that way the Verilog constraint is met.
 
-There will be a separate logic block (identification of the next state) that determines the next state but assigns that next state into the 'next_state' variable instead of into into the 'current_state' variable directly. The reset/apply block will update 'current_state' from the 'next_state' variable as stated above.
+There will be a separate logic block (identification of the next state) that determines the next state but assigns that next state into the 'next_state' variable instead of into the 'current_state' variable directly. The reset/apply block will update 'current_state' from the 'next_state' variable as stated above.
 
 A third block reads the 'current_state' variable and contains a large switch-case statement containing a case for each state of the statemachine. The case-statements perform the actions that the state machine has to execute during each individual state.
 
